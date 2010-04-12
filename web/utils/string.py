@@ -79,8 +79,6 @@ def normalize(name, collection=[], expression=re.compile('\W+')):
         value = ("%s%s" % (base.strip('-'), ("-%d" % (suffix, )) if suffix else ""))
         if value not in collection: return value
         suffix += 1
-    
-    raise ValueError
 
 
 def ellipsis(text, length):

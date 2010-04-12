@@ -4,8 +4,6 @@ import web.core
 import webob.exc
 from paste.registry import StackedObjectProxy
 
-import middleware
-
 from predicates import *
 
 
