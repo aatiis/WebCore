@@ -18,10 +18,10 @@ class CStringIO(object):
     def __init__(self, *a, **kw):
         try:
             from cStringIO import StringIO
-        
+
         except ImportError:
             from StringIO import StringIO
-        
+
         self.__csio = StringIO(*a, **kw)
 
     def __iter__(self):
@@ -69,12 +69,12 @@ class CStringIO(object):
 
 def normalize(name, collection=[], expression=re.compile('\W+')):
     """
-    
+
     """
     base = expression.sub('-', name.lower())
     suffix = 0
     value = None
-    
+
     while True:
         value = ("%s%s" % (base.strip('-'), ("-%d" % (suffix, )) if suffix else ""))
         if value not in collection: return value
@@ -84,7 +84,7 @@ def normalize(name, collection=[], expression=re.compile('\W+')):
 def ellipsis(text, length):
     """
     Present a block of text of given length.
-    
+
     If the length of available text exceeds the requested length, truncate and
     intelligently append an ellipsis.
     """

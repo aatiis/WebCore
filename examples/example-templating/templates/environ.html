@@ -5,9 +5,9 @@
     </head>
     <body>
         <h1>Environment Variables</h1>
-        
+
         <h2>WSGI / CGI Environment Variables</h2>
-        
+
         <table>
             <py:for each="name, value in dict([(i, j) for i, j in environ.iteritems() if i == i.upper()]).iteritems()">
                 <tr>
@@ -16,9 +16,9 @@
                 </tr>
             </py:for>
         </table>
-        
+
         <h2>Other Variables</h2>
-        
+
         <table>
             <py:for each="name, value in dict([(i, j) for i, j in environ.iteritems() if i != i.upper()]).iteritems()">
                 <tr>
@@ -27,18 +27,18 @@
                 </tr>
             </py:for>
         </table>
-        
-        
+
+
         <h1>Parsed Arguments</h1>
-        
+
         <h2>Positional</h2>
-        
+
         <ol>
             <li py:for="arg in args" py:content="repr(arg)" />
         </ol>
-        
+
         <h2>Keyword</h2>
-        
+
         <table>
             <py:for each="name, value in kw.iteritems()">
                 <tr>

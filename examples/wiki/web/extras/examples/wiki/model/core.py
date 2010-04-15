@@ -13,6 +13,6 @@ __all__ = ['Article']
 
 class Article(Base):
     __tablename__ = 'articles'
-    
+
     name = Column(Unicode(250), primary_key=True)
     content = Column(UnicodeText)

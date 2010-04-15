@@ -66,39 +66,39 @@ class ShellCommand(Command):
         if not self.options.quiet:
             # Configure logging from the config file
             self.logging_file_config(config_file)
-        
+
         conf = appconfig(config_name, relative_to=here_dir)
         conf.update(dict(app_conf=conf.local_conf, global_conf=conf.global_conf))
         paste.deploy.config.CONFIG.push_thread_config(conf)
-        
+
         # Load locals and populate with objects for use in shell
         sys.path.insert(0, here_dir)
-        
+
         # Load the wsgi app first so that everything is initialized right
         wsgiapp = loadapp(config_name, relative_to=here_dir)
         test_app = paste.fixture.TestApp(wsgiapp)
-        
+
         # Query the test app to setup the environment
         tresponse = test_app.get('/_test_vars')
         request_id = int(tresponse.body)
-        
+
         # Disable restoration during test_app requests
         test_app.pre_request_hook = lambda self: paste.registry.restorer.restoration_end()
         test_app.post_request_hook = lambda self: paste.registry.restorer.restoration_begin(request_id)
-        
+
         paste.registry.restorer.restoration_begin(request_id)
-        
+
         locs = dict(__name__="webcore-admin", application=wsgiapp, test=test_app)
-        
+
         exec 'import web' in locs
         exec 'from web.core import http, Controller, request, response, cache, session' in locs
-        
+
         if len(self.args) == 2:
             execfile(self.args[1], {}, locs)
             return
-        
+
         banner = "Welcome to the WebCore shell."
-        
+
         try:
             if self.options.disable_ipython:
                 raise ImportError()
@@ -112,7 +112,7 @@ class ShellCommand(Command):
                 shell(local_ns=locs, global_ns={})
             finally:
                 paste.registry.restorer.restoration_end()
-        
+
         except ImportError:
             import code
             py_prefix = sys.platform.startswith('java') and 'J' or 'P'

@@ -4,14 +4,14 @@
         xmlns:xi="http://www.w3.org/2001/XInclude"
         method="post"
         class="modify">
-        
+
         <dl>
             <dt><label>Article Name:</label></dt>
             <dd><input name="name" type="text" py:attrs="{'value': article.name} if article else {'value': name}" /></dd>
-            
+
             <dt><label>Article Content:</label></dt>
             <dd><textarea name="content" py:content="article.content if article else ''"></textarea></dd>
         </dl>
-            
+
         <input type="submit" />
 </form>

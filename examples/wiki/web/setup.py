@@ -10,14 +10,14 @@ setup(
         packages = find_packages(),
         include_package_data = False,
         zip_safe = False,
-        
+
         install_requires = [
                 'WebCore',
                 'Genshi',
                 'SQLAlchemy',
                 'textile'
             ],
-        
+
         namespace_packages = [
                 'web',
                 'web.extras',

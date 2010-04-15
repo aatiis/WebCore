@@ -14,12 +14,12 @@ class BarController(object):
 class RootController(RoutingController):
     def __init__(self):
         super(RootController, self).__init__()
-        
+
         self._map.connect(None, '/error/{foo}', action="error")
         self._map.connect(None, '/error/{foo}/bar', controller="bar", action="error")
-    
+
     bar = BarController()
-    
+
     def error(self, foo):
         return repr(foo)
 
@@ -29,7 +29,7 @@ test_config = {'debug': True, 'web.widgets': False, 'web.sessions': False, 'web.
 
 class TestRESTfulDispatch(WebTestCase):
     app = Application.factory(root=RootController, **test_config)
-    
+
     def test_basic(self):
         self.assertResponse('/', '404 Not Found', 'text/html')
         self.assertResponse('/error', '404 Not Found', 'text/html')
